@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About Us - Shameem Tour & Travel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* BASE RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter', sans-serif; line-height:1.6; background:#f8f9fa; overflow-x:hidden; }
+.container { max-width:1200px; margin:0 auto; padding:0 24px; }
+
+/* HEADER */
+.header { 
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); 
+  position:fixed; top:0; left:0; right:0; z-index:1000; 
+  padding:10px 0; box-shadow:0 2px 40px rgba(0,0,0,0.08); 
+}
+.nav { display:flex; justify-content:space-between; align-items:center; }
+.logo-container { display:flex; align-items:center; gap:8px; text-decoration:none; }
+.logo-img { height:36px; width:auto; }
+.logo-text { 
+  font-size:20px; font-weight:800; background:linear-gradient(135deg,#1f4fff,#667eea); 
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; 
+  white-space: nowrap;
+}
+.cta-back { 
+  background:linear-gradient(135deg,#1f4fff,#667eea); color:#fff; 
+  padding:8px 20px; border-radius:25px; font-weight:600; font-size:13px; 
+  text-decoration:none; box-shadow:0 6px 20px rgba(31,79,255,0.3); 
+  transition:all 0.3s; display:inline-flex; align-items:center; gap:6px;
+}
+.cta-back:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(31,79,255,0.4); }
+
+/* HERO - Compact */
+.hero { 
+  background:linear-gradient(135deg,rgba(31,79,255,0.12),rgba(102,126,234,0.08)), 
+  url('https://images.unsplash.com/photo-1460925895917-afdab827c52f') center/cover; 
+  min-height:40vh; display:flex; align-items:center; padding-top:60px; position:relative; 
+}
+.hero-content { text-align:center; color:#fff; max-width:800px; margin:0 auto; padding:0 24px; width: 100%; }
+.hero-title { 
+  font-size:clamp(2.5rem,8vw,5rem); font-weight:800; letter-spacing:-1px; 
+  margin-bottom:0.5rem; line-height:1.1; text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.hero-subtitle { font-size:clamp(1rem, 4vw, 1.4rem); opacity:0.95; font-weight: 500; }
+
+/* SECTIONS COMMON */
+.about-section, .team-section, .stats-section { padding: 40px 0; }
+.section-title { 
+  font-size:clamp(1.8rem,5vw,3rem); font-weight:700; color:#1f2937; 
+  text-align:center; margin-bottom:30px; letter-spacing:-0.5px; 
+}
+
+/* CEO SECTION */
+.ceo-section { padding:50px 0; background:linear-gradient(135deg,#f8fafc,#f1f5f9); }
+.ceo-container { 
+  display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; 
+  max-width:1000px; margin:0 auto; 
+}
+.ceo-photo { 
+  position:relative; border-radius:20px; overflow:hidden; 
+  box-shadow:0 20px 60px rgba(0,0,0,0.1); 
+}
+.ceo-photo img { width:100%; height:450px; object-fit:cover; transition: transform 0.3s; }
+
+.ceo-content h2 { font-size:28px; font-weight:800; color:#1f2937; margin-bottom:10px; }
+.ceo-content .ceo-quote { 
+  font-size:16px; font-weight:400; color:#4b5563; 
+  line-height:1.6; margin-bottom:20px; font-style:italic; 
+  position:relative; padding-left:20px; border-left: 4px solid #1f4fff;
+}
+.ceo-designation { 
+  font-size:14px; color:#1f4fff; font-weight:700; 
+  letter-spacing:1px; text-transform:uppercase; margin-bottom: 15px; display: block;
+}
+
+/* TEAM GRID */
+.team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
+
+.team-card { 
+  background:#fff; padding:30px 20px; border-radius:20px; 
+  box-shadow:0 10px 30px rgba(0,0,0,0.05); text-align:center; 
+  transition:all 0.4s; position:relative; overflow:hidden; 
+}
+.team-card:hover { transform:translateY(-5px); box-shadow:0 20px 50px rgba(0,0,0,0.1); }
+
+.office-avatar, .driver-avatar { 
+  width:80px; height:80px; border-radius:50%; 
+  margin:0 auto 16px; display:flex; align-items:center; justify-content:center; 
+  font-size:28px; color:#fff; 
+}
+.office-avatar { background:linear-gradient(135deg,#10b981,#059669); box-shadow:0 10px 20px rgba(16,185,129,0.2); }
+.driver-avatar { background:linear-gradient(135deg,#1f4fff,#667eea); box-shadow:0 10px 20px rgba(31,79,255,0.2); }
+
+.team-name { font-size:20px; font-weight:700; color:#1f2937; margin-bottom:4px; }
+.team-role { font-size:13px; color:#1f4fff; font-weight:700; margin-bottom:12px; text-transform:uppercase; }
+.team-quote { font-size:14px; color:#6b7280; font-style:italic; line-height:1.5; }
+
+/* STATS */
+.stats-section { background:#fff; }
+.stats-grid { 
+  display:grid; grid-template-columns:repeat(4, 1fr); 
+  gap:20px; text-align:center; max-width:900px; margin:0 auto; 
+}
+.stat-icon { font-size:36px; color:#1f4fff; margin-bottom:8px; }
+.stat-number { 
+  font-size:clamp(2rem, 5vw, 3.5rem); font-weight:800; 
+  background:linear-gradient(135deg,#1f4fff,#667eea); 
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; 
+  display:block; margin-bottom:0; line-height: 1.2;
+}
+.stat-label { font-size:12px; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing: 0.5px; }
+
+/* MOBILE COMPACT OPTIMIZATION */
+@media (max-width:768px) {
+  .container { padding: 0 16px; }
+  
+  /* Header */
+  .logo-text { font-size: 18px; }
+  .logo-img { height: 32px; }
+  
+  /* Hero */
+  .hero { min-height: 250px; padding-top: 70px; }
+  .hero-title { font-size: 2.5rem; margin-bottom: 5px; }
+  
+  /* CEO Compact */
+  .ceo-container { grid-template-columns:1fr; gap:30px; text-align:center; }
+  .ceo-photo img { height:300px; }
+  .ceo-content .ceo-quote { text-align: left; padding-left: 15px; border-left: 3px solid #1f4fff; }
+  
+  /* Team Grid Compact */
+  .team-grid { grid-template-columns:1fr; gap: 16px; }
+  .team-card { padding: 20px; display: flex; align-items: center; gap: 15px; text-align: left; }
+  .office-avatar, .driver-avatar { margin: 0; width: 60px; height: 60px; font-size: 20px; flex-shrink: 0; }
+  .team-info { flex: 1; }
+  .team-name { font-size: 18px; margin-bottom: 2px; }
+  .team-role { margin-bottom: 4px; }
+  .team-quote { font-size: 13px; }
+
+  /* Stats Compact - 2x2 Grid */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .stat-item { background: #f8fafc; padding: 15px; border-radius: 12px; }
+  .stat-number { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="./index.html" class="logo-container">
+        <img src="20251214_061918.png" alt="Logo" class="logo-img">
+        <span class="logo-text">Shameem Tour & Travel</span>
+      </a>
+      <a href="./index.html" class="cta-back">
+        <i class="fas fa-arrow-left"></i> Home
+      </a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">About Our Team</h1>
+    <p class="hero-subtitle">28+ Years Combined Experience | 1M+ Safe KMs Driven</p>
+  </div>
+</section>
+
+<section class="ceo-section">
+  <div class="container">
+    <div class="ceo-container">
+      <div class="ceo-photo">
+        <img src="20251231_102622.jpg" alt="Mohammad Farooq Qureshi - CEO">
+      </div>
+      <div class="ceo-content">
+        <h2>Farooq Qureshi</h2>
+        <span class="ceo-designation">Founder & CEO</span>
+        <div class="ceo-quote">
+          "Safe travel is not just our promise, it's our passion. Since 2020, we've connected millions of kilometers with trust and reliability across 28 states."
+        </div>
+        <p style="font-size:14px; color:#6b7280; font-weight: 500;">
+          <i class="fas fa-check-circle" style="color:#10b981; margin-right:5px;"></i> 15+ years in travel industry<br>
+          <i class="fas fa-check-circle" style="color:#10b981; margin-right:5px;"></i> Chhattisgarh Tourism Expert
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <h2 class="section-title">Office Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="office-avatar"><i class="fas fa-user"></i></div>
+        <div class="team-info">
+          <h3 class="team-name">Sanyogita Yadav</h3>
+          <p class="team-role">Operations Manager</p>
+          <p class="team-quote">"Every booking is handled with precision and care."</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="office-avatar"><i class="fas fa-headset"></i></div>
+        <div class="team-info">
+          <h3 class="team-name">Anas Qureshi</h3>
+          <p class="team-role">Customer Support</p>
+          <p class="team-quote">"24×7 availability for all your travel queries."</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="office-avatar"><i class="fas fa-calendar-check"></i></div>
+        <div class="team-info">
+          <h3 class="team-name">Altamash Qureshi</h3>
+          <p class="team-role">Booking Coordinator</p>
+          <p class="team-quote">"Fastest booking confirmations with best rates."</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="office-avatar"><i class="fas fa-route"></i></div>
+        <div class="team-info">
+          <h3 class="team-name">Taufik Qureshi</h3>
+          <p class="team-role">Logistics Manager</p>
+          <p class="team-quote">"Perfect route planning ensures timely pickups."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section" style="background:#f8fafc;">
+  <div class="container">
+    <h2 class="section-title">Experienced Drivers</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="driver-avatar"><i class="fas fa-car"></i></div>
+        <div class="team-info">
+          <h3 class="team-name">Manoj</h3>
+          <p class="team-role">Senior Driver (12 Years)</p>
+          <p class="team-quote">"500K+ safe kilometers driven across 15 states."</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="driver-avatar"><i class="fas fa-moon"></i></div>
+        <div class="team-info">
+          <h3 class="team-name">Kapil</h3>
+          <p class="team-role">Lead Driver (10 Years)</p>
+          <p class="team-quote">"Customer comfort is my priority. Night specialist."</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="driver-avatar"><i class="fas fa-map-marked-alt"></i></div>
+        <div class="team-info">
+          <h3 class="team-name">Parkash</h3>
+          <p class="team-role">Exp Driver (15 Years)</p>
+          <p class="team-quote">"All India routes expert. Zero accidents record."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <i class="fas fa-users stat-icon"></i>
+        <span class="stat-number">10+</span>
+        <p class="stat-label">Members</p>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-road stat-icon"></i>
+        <span class="stat-number">1M+</span>
+        <p class="stat-label">Safe KMs</p>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-calendar stat-icon"></i>
+        <span class="stat-number">2020</span>
+        <p class="stat-label">Since</p>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-star stat-icon"></i>
+        <span class="stat-number">5★</span>
+        <p class="stat-label">Rating</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

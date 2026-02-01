@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contact Us - Shameem Tour & Travel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* BASE RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter', sans-serif; line-height:1.6; background:#f8f9fa; overflow-x:hidden; }
+.container { max-width:1200px; margin:0 auto; padding:0 24px; }
+
+/* HEADER */
+.header { 
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); 
+  position:fixed; top:0; left:0; right:0; z-index:1000; 
+  padding:10px 0; box-shadow:0 2px 40px rgba(0,0,0,0.08); 
+}
+.nav { display:flex; justify-content:space-between; align-items:center; }
+.logo-container { display:flex; align-items:center; gap:8px; text-decoration:none; }
+.logo-img { height:36px; width:auto; }
+.logo-text { 
+  font-size:20px; font-weight:800; background:linear-gradient(135deg,#1f4fff,#667eea); 
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; 
+  white-space: nowrap;
+}
+.cta-back { 
+  background:linear-gradient(135deg,#1f4fff,#667eea); color:#fff; 
+  padding:8px 20px; border-radius:25px; font-weight:600; font-size:13px; 
+  text-decoration:none; box-shadow:0 6px 20px rgba(31,79,255,0.3); 
+  transition:all 0.3s; display:inline-flex; align-items:center; gap:6px;
+}
+.cta-back:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(31,79,255,0.4); }
+
+/* HERO - Compact Height */
+.hero { 
+  background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(34,197,94,0.1)), 
+  url('https://images.unsplash.com/photo-1558618047-3c8c76ffe7e6') center/cover; 
+  min-height:40vh; display:flex; align-items:center; padding-top:60px; position:relative; 
+}
+.hero-content { text-align:center; color:#fff; max-width:800px; margin:0 auto; padding:0 24px; width: 100%; }
+.hero-title { 
+  font-size:clamp(2.5rem,8vw,5rem); font-weight:800; letter-spacing:-1px; 
+  margin-bottom:0.5rem; line-height:1.1; text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.hero-subtitle { font-size:clamp(1rem, 4vw, 1.4rem); opacity:0.95; font-weight: 500; }
+
+/* CONTACT SECTIONS */
+.contact-section { padding:40px 0; }
+.section-title { 
+  font-size:clamp(1.8rem,5vw,3rem); font-weight:700; color:#1f2937; 
+  text-align:center; margin-bottom:30px; letter-spacing:-0.5px; 
+}
+.contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+
+/* CONTACT CARDS */
+.contact-card { 
+  background:#fff; padding:30px 20px; border-radius:20px; 
+  box-shadow:0 10px 40px rgba(0,0,0,0.05); text-align:center; 
+  transition:all 0.4s; position:relative; overflow:hidden; 
+}
+.contact-card::before { 
+  content:''; position:absolute; top:0; left:0; right:0; height:4px; 
+  background:linear-gradient(90deg,#1f4fff,#10b981,#ff6b6b); 
+  transform:scaleX(0); transition:all 0.3s; 
+}
+.contact-card:hover { transform:translateY(-4px); box-shadow:0 20px 60px rgba(0,0,0,0.1); }
+.contact-card:hover::before { transform:scaleX(1); }
+
+.contact-icon { 
+  font-size:40px; margin-bottom:16px; display:block; 
+  width:80px; height:80px; border-radius:20px; 
+  display:flex; align-items:center; justify-content:center; 
+  margin:0 auto 16px; box-shadow:0 8px 20px rgba(0,0,0,0.05); 
+}
+.contact-icon.whatsapp { background:linear-gradient(135deg,#25D366,#128C7E); color:#fff; }
+.contact-icon.phone { background:linear-gradient(135deg,#ef4444,#dc2626); color:#fff; }
+.contact-icon.social { background:linear-gradient(135deg,#3b82f6,#1d4ed8); color:#fff; }
+.contact-icon.location { background:linear-gradient(135deg,#10b981,#059669); color:#fff; }
+
+.contact-title { font-size:20px; font-weight:700; color:#1f2937; margin-bottom:8px; }
+.contact-text { font-size:14px; color:#6b7280; margin-bottom:16px; line-height:1.5; }
+
+.phone-number { font-size:20px; font-weight:800; margin:8px 0; display: block; }
+
+.contact-btn { 
+  background:linear-gradient(135deg,#1f4fff,#667eea); color:#fff; 
+  padding:12px 24px; border:none; border-radius:50px; 
+  font-weight:600; font-size:15px; cursor:pointer; 
+  transition:all 0.3s; display:inline-flex; align-items:center; justify-content:center; gap:8px; 
+  box-shadow:0 8px 25px rgba(31,79,255,0.3); width: 100%; max-width: 250px;
+}
+.contact-btn:hover { transform:translateY(-2px); box-shadow:0 15px 40px rgba(31,79,255,0.4); }
+
+/* SOCIAL LINKS SPECIFIC */
+.social-links { margin:16px 0; display:flex; flex-direction:column; gap:10px; align-items: center; }
+.social-link-item { 
+  display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; text-decoration: none;
+  background: #f8fafc; padding: 10px 20px; border-radius: 12px; width: 100%; max-width: 250px; justify-content: center;
+}
+
+/* MAP SECTION */
+.map-section { padding:40px 0; background:#f8fafc; }
+.map-container { 
+  background:#e5e7eb; height:300px; border-radius:20px; 
+  overflow:hidden; box-shadow:0 10px 40px rgba(0,0,0,0.05); 
+  position:relative; 
+}
+.map-placeholder { 
+  height:100%; display:flex; flex-direction:column; 
+  align-items:center; justify-content:center; color:#6b7280; 
+  text-align:center; background:linear-gradient(135deg,#f1f5f9,#e2e8f0); padding: 20px;
+}
+
+/* HOURS */
+.hours-section { padding:40px 0; }
+.hours-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+.hour-card { background:#fff; padding:30px 24px; border-radius:20px; box-shadow:0 10px 40px rgba(0,0,0,0.05); }
+.hour-title { font-size:22px; font-weight:700; color:#1f2937; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.hour-list { list-style:none; }
+.hour-item { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f1f5f9; font-size:14px; }
+.hour-item:last-child { border-bottom:none; }
+.hour-time { font-weight:700; color:#10b981; }
+
+/* MOBILE COMPACT OPTIMIZATION */
+@media (max-width:768px) {
+  .container { padding: 0 16px; }
+  
+  /* Header Compact */
+  .logo-text { font-size: 18px; }
+  .logo-img { height: 32px; }
+  
+  /* Hero Compact */
+  .hero { min-height: 250px; padding-top: 70px; }
+  .hero-title { font-size: 2.5rem; margin-bottom: 5px; }
+  .hero-subtitle { font-size: 1rem; }
+  
+  /* Contact Grid Compact */
+  .contact-section { padding: 30px 0; }
+  .contact-grid { grid-template-columns:1fr; gap: 16px; }
+  .contact-card { padding: 24px 16px; display: flex; flex-direction: column; align-items: center; }
+  
+  /* Icons & Text Compact */
+  .contact-icon { width: 60px; height: 60px; font-size: 28px; margin-bottom: 12px; }
+  .contact-title { font-size: 18px; }
+  .contact-text { font-size: 13px; margin-bottom: 12px; }
+  .phone-number { font-size: 18px; margin: 4px 0; }
+  
+  /* Buttons Compact */
+  .contact-btn { width: 100%; padding: 14px; font-size: 16px; max-width: none; }
+  .social-link-item { width: 100%; max-width: none; padding: 12px; }
+  
+  /* Map & Hours Compact */
+  .map-section, .hours-section { padding: 30px 0; }
+  .section-title { font-size: 1.8rem; margin-bottom: 20px; }
+  .map-container { height: 220px; }
+  .hour-card { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="./index.html" class="logo-container">
+        <img src="20251214_061918.png" alt="Logo" class="logo-img">
+        <span class="logo-text">Shameem Tour & Travel</span>
+      </a>
+      <a href="./index.html" class="cta-back">
+        <i class="fas fa-arrow-left"></i> Home
+      </a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Contact Us</h1>
+    <p class="hero-subtitle">24×7 Service | WhatsApp | Call | All India Coverage</p>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-grid">
+      
+      <div class="contact-card">
+        <i class="fab fa-whatsapp contact-icon whatsapp"></i>
+        <h3 class="contact-title">WhatsApp Booking</h3>
+        <p class="contact-text">Instant booking confirmation. Available 24×7.</p>
+        <span class="phone-number" style="color:#25D366;">+91 9076690347</span>
+        <span class="phone-number" style="color:#25D366; margin-bottom: 16px;">+91 7879300388</span>
+        <button class="contact-btn" onclick="openWhatsApp()">
+          <i class="fab fa-whatsapp"></i> Send Message
+        </button>
+      </div>
+
+      <div class="contact-card">
+        <i class="fas fa-phone contact-icon phone"></i>
+        <h3 class="contact-title">Phone Support</h3>
+        <p class="contact-text">Call anytime for instant support.</p>
+        <span class="phone-number" style="color:#1f2937;">+91 9076690347</span>
+        <span class="phone-number" style="color:#1f2937; margin-bottom: 16px;">+91 7879300388</span>
+        <button class="contact-btn" onclick="callNow()">
+          <i class="fas fa-phone"></i> Call Now
+        </button>
+      </div>
+
+      <div class="contact-card">
+        <i class="fas fa-share-alt contact-icon social"></i>
+        <h3 class="contact-title">Social Media</h3>
+        <p class="contact-text">Follow us for latest offers.</p>
+        <div class="social-links">
+          <a href="https://wa.me/919076690347" class="social-link-item" style="color:#25D366;">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+          <a href="https://www.instagram.com/shameemtours" class="social-link-item" style="color:#E4405F;">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+          <a href="https://www.facebook.com/share/17isQV6xgp/" class="social-link-item" style="color:#1877F2;">
+            <i class="fab fa-facebook"></i> Facebook
+          </a>
+          <a href="mailto:shameemtourtravels@gmail.com" class="social-link-item" style="color:#EA4335;">
+            <i class="fas fa-envelope"></i> Email
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <i class="fas fa-map-marker-alt contact-icon location"></i>
+        <h3 class="contact-title">Our Location</h3>
+        <p class="contact-text">Chhattisgarh base with pan-India service coverage.</p>
+        <div style="font-size:15px; color:#1f2937; margin:10px 0 20px; font-weight: 500;">
+          Chhattisgarh (33 Districts)<br>
+          All India Coverage<br>
+          Doorstep Pickup Available
+        </div>
+        <a href="https://maps.google.com" target="_blank" class="contact-btn">
+          <i class="fas fa-map"></i> Open Google Maps
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="container">
+    <h2 class="section-title">Find Us</h2>
+    <div class="map-container">
+      <div class="map-placeholder">
+        <i class="fas fa-map-marked-alt" style="font-size:48px; margin-bottom:12px; opacity:0.6;"></i>
+        <h3 style="font-size:20px; margin:8px 0; color:#1f2937;">📍 Chhattisgarh Headquarters</h3>
+        <p style="font-size:15px; max-width:300px; margin-bottom: 16px;">Serving 28 States | 33 Chhattisgarh Districts | Pan-India Coverage</p>
+        <a href="https://maps.google.com" target="_blank" style="color:#1f4fff; font-weight:700; text-decoration:none; font-size: 15px;">
+          Open in Google Maps →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hours-section">
+  <div class="container">
+    <h2 class="section-title">Service Hours</h2>
+    <div class="hours-grid">
+      <div class="hour-card">
+        <h3 class="hour-title">
+          <i class="fas fa-clock" style="color:#10b981;"></i>
+          24×7 Availability
+        </h3>
+        <ul class="hour-list">
+          <li class="hour-item"><span>📱 WhatsApp Support</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>📞 Phone Support</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>🚗 Emergency Booking</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>🌙 Night Service</span><span class="hour-time">Available</span></li>
+        </ul>
+      </div>
+      <div class="hour-card">
+        <h3 class="hour-title">
+          <i class="fas fa-calendar-check" style="color:#1f4fff;"></i>
+          Weekly Service
+        </h3>
+        <ul class="hour-list">
+          <li class="hour-item"><span>Monday</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>Tuesday</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>Wednesday</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>Thursday</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>Friday</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>Saturday</span><span class="hour-time">24 Hours</span></li>
+          <li class="hour-item"><span>Sunday</span><span class="hour-time">24 Hours</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function openWhatsApp() {
+  const message = encodeURIComponent("Hi! I'm interested in booking a cab 🚗 Please share availability & rates.");
+  window.open("https://wa.me/919076690347?text=" + message, '_blank');
+}
+
+function callNow() {
+  window.open("tel:+919076690347");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Book Now - Shameem Tour & Travel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* BASE RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter', sans-serif; line-height:1.6; background:#f8f9fa; overflow-x:hidden; }
+.container { max-width:1200px; margin:0 auto; padding:0 24px; }
+
+/* HEADER */
+.header { 
+  background:rgba(255,255,255,0.95); 
+  backdrop-filter:blur(20px); 
+  position:fixed; top:0; left:0; right:0; 
+  z-index:1000; padding:12px 0; 
+  box-shadow:0 2px 40px rgba(0,0,0,0.08); 
+}
+.nav { display:flex; justify-content:space-between; align-items:center; }
+.logo-container { 
+  display:flex; align-items:center; gap:10px; 
+  text-decoration:none; cursor:pointer; 
+}
+.logo-img { height:36px; width:auto; }
+.logo-text { 
+  font-size:20px; font-weight:800; 
+  background:linear-gradient(135deg,#1f4fff,#667eea); 
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; 
+  white-space: nowrap;
+}
+.cta-back { 
+  background:linear-gradient(135deg,#1f4fff,#667eea); 
+  color:#fff; padding:8px 20px; border-radius:25px; 
+  font-weight:600; font-size:14px; text-decoration:none; 
+  box-shadow:0 6px 20px rgba(31,79,255,0.3); 
+  transition:all 0.3s; display:inline-flex; align-items:center; gap:8px;
+}
+.cta-back:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(31,79,255,0.4); }
+
+/* HERO - CHANGED TO FULL IMAGE */
+.hero { 
+  margin-top: 60px; /* Header space */
+  width: 100%;
+  position: relative;
+  background: #000; /* Fallback */
+}
+.hero-img-full {
+  width: 100%;
+  height: auto; 
+  display: block;
+}
+
+/* MEDICAL SECTION (UPDATED with Animation) */
+.medical-banner {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin: 20px auto;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between content and button */
+  gap: 20px;
+  border: 1px solid #e0e7ff;
+  max-width: 900px;
+}
+.med-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.med-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain; 
+  border-radius: 12px;
+  background: #f0fdf4;
+}
+.med-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 4px;
+}
+.med-content p {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+.med-time {
+  display: inline-block;
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* ANIMATED BUTTON CSS */
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); transform: scale(1); }
+  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); transform: scale(1.05); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); transform: scale(1); }
+}
+
+.med-btn-anim {
+  background: #dc2626; /* Red Color */
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: pulse-red 2s infinite; /* Animation applied here */
+  white-space: nowrap;
+  transition: background 0.3s;
+}
+.med-btn-anim:hover {
+  background: #b91c1c;
+  animation: none; /* Stop animation on hover */
+}
+
+/* TABS */
+.booking-tabs { 
+  background:#fff; padding:20px 0; box-shadow:0 10px 40px rgba(0,0,0,0.05); 
+  position:relative; z-index:100; margin-top: 0; border-radius: 0;
+}
+.tabs-container { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.tab-btn { 
+  padding:12px 24px; border:2px solid #e5e7eb; border-radius:50px; 
+  background:#fff; font-weight:600; font-size:15px; cursor:pointer; 
+  transition:all 0.4s; flex: 1; text-align:center; white-space: nowrap; max-width: 150px;
+}
+.tab-btn.active { 
+  background:linear-gradient(135deg,#1f4fff,#667eea); color:#fff; 
+  border-color:#1f4fff; transform:translateY(-2px); 
+  box-shadow:0 8px 20px rgba(31,79,255,0.25); 
+}
+
+/* FORM SECTION */
+.form-section { display:none; padding:40px 0; background:#f8fafc; }
+.form-section.active { display:block; }
+.form-container { 
+  background:#fff; padding:40px; border-radius:24px; 
+  box-shadow:0 20px 60px rgba(0,0,0,0.05); max-width:900px; margin:0 auto; 
+}
+.form-title { 
+  font-size:clamp(1.8rem,5vw,3rem); font-weight:700; color:#1f2937; 
+  margin-bottom:20px; text-align:center; letter-spacing:-0.5px; 
+}
+
+/* FREE PERK BADGE */
+.free-perk {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  color: #b45309;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.free-perk i { font-size: 16px; }
+
+.form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-bottom:20px; }
+.form-group { margin-bottom: 16px; }
+.form-label { display:block; font-size:14px; font-weight:700; color:#374151; margin-bottom:8px; }
+.form-input, .form-select { 
+  width:100%; padding:14px; border:2px solid #e5e7eb; border-radius:12px; 
+  font-size:15px; font-weight:500; transition:all 0.3s; background:#fafbfc; 
+}
+.form-input:focus, .form-select:focus { 
+  outline:none; border-color:#1f4fff; background:#fff; 
+  box-shadow:0 0 0 3px rgba(31,79,255,0.1); 
+}
+
+/* CAR & PACKAGE GRID SELECTION */
+.car-grid, .package-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:24px 0; }
+.car-card, .package-card { 
+  border:2px solid #e5e7eb; border-radius:16px; padding:16px; 
+  text-align:center; cursor:pointer; transition:all 0.3s; 
+  background:#fff; position:relative; overflow:hidden; 
+}
+.car-card:hover, .package-card:hover { border-color:#1f4fff; transform:translateY(-4px); }
+.car-card.active, .package-card.active { 
+  border-color:#1f4fff; background:linear-gradient(135deg,rgba(31,79,255,0.05),rgba(102,126,234,0.05)); 
+  box-shadow: 0 0 0 2px rgba(31,79,255,0.2);
+}
+.car-name, .package-name { font-size:15px; font-weight:700; margin-bottom:4px; }
+.car-price, .package-price { font-size:14px; font-weight:800; color:#10b981; }
+.package-desc { font-size: 11px; color: #6b7280; margin-top: 4px; }
+
+/* DURATION & COUNT */
+.duration-group { display:flex; gap:16px; align-items:end; }
+.duration-input { flex:1; }
+
+.count-controls { 
+  display:flex; align-items:center; gap:20px; background:#f1f5f9; 
+  padding:12px; border-radius:12px; justify-content:center; margin:20px 0; 
+}
+.count-btn { 
+  width:40px; height:40px; border:2px solid #1f4fff; background:#fff; 
+  border-radius:50%; font-size:18px; font-weight:700; cursor:pointer; 
+  display:flex; align-items:center; justify-content:center; 
+}
+.count-value { font-size:24px; font-weight:800; color:#1f4fff; min-width:40px; text-align:center; }
+
+/* SUBMIT BUTTON */
+.submit-section { text-align:center; margin-top:32px; }
+.submit-btn { 
+  background:linear-gradient(135deg,#1f4fff,#667eea); color:#fff; 
+  padding:16px 48px; border:none; border-radius:50px; font-size:18px; 
+  font-weight:700; cursor:pointer; box-shadow:0 15px 40px rgba(31,79,255,0.3); 
+  transition:all 0.4s; display:inline-flex; align-items:center; gap:10px; width: 100%; justify-content: center;
+}
+.submit-btn:hover { transform:translateY(-4px); box-shadow:0 24px 60px rgba(31,79,255,0.4); }
+
+/* MOBILE COMPACT OPTIMIZATION */
+@media (max-width:768px) { 
+  .container { padding: 0 16px; }
+  .logo-text { font-size: 18px; }
+  .logo-img { height: 32px; }
+  .hero { margin-top: 60px; }
+  .booking-tabs { padding: 10px 0; }
+  .tabs-container { gap: 8px; }
+  .tab-btn { padding: 10px; font-size: 13px; max-width: none; flex: 1; }
+  .form-section { padding: 20px 0 60px; }
+  .form-container { padding: 24px 16px; border-radius: 20px; }
+  .form-title { font-size: 1.6rem; margin-bottom: 20px; text-align: left; }
+  .form-grid { grid-template-columns:1fr; gap:16px; margin-bottom: 16px; }
+  .form-input, .form-select { padding: 12px; font-size: 14px; }
+  .form-group { margin-bottom: 14px; }
+  .car-grid, .package-grid { grid-template-columns:repeat(2,1fr); gap: 10px; margin: 16px 0; }
+  .car-card, .package-card { padding: 12px 8px; }
+  .car-name, .package-name { font-size: 13px; }
+  .car-price, .package-price { font-size: 14px; }
+  .count-controls { padding: 10px; margin: 16px 0; }
+  .count-btn { width: 36px; height: 36px; }
+  .submit-btn { padding: 16px; font-size: 16px; }
+  
+  /* Mobile Medical Banner */
+  .medical-banner { flex-direction: column; text-align: center; padding: 16px; gap: 16px; }
+  .med-left { flex-direction: column; }
+  .med-img { width: 60px; height: 60px; }
+  .med-btn-anim { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="./index.html" class="logo-container">
+        <img src="20251214_061918.png" alt="Logo" class="logo-img">
+        <span class="logo-text">Shameem Tour & Travel</span>
+      </a>
+      <a href="./index.html" class="cta-back"><i class="fas fa-arrow-left"></i> Home</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="Offers-to-Customers-For-Travel-Agencies-.jpg" alt="Banner" class="hero-img-full">
+</section>
+
+<div class="container">
+  <div class="medical-banner">
+    <div class="med-left">
+      <img src="caduceus-medical-symbol.jpg" alt="Medical Icon" class="med-img">
+      <div class="med-content">
+        <h3>Free Medical Services</h3>
+        <p>Only in Raipur</p>
+        <div class="med-time">Time: 9:30 PM to 12:30 PM</div>
+      </div>
+    </div>
+    <a href="medical.html" class="med-btn-anim">
+      <i class="fas fa-ambulance"></i> Book Service
+    </a>
+  </div>
+</div>
+
+<div class="booking-tabs">
+  <div class="container">
+    <div class="tabs-container">
+      <button class="tab-btn active" id="btn-oneway" onclick="switchTab('oneway')">One Way</button>
+      <button class="tab-btn" id="btn-round" onclick="switchTab('round')">Round Trip</button>
+      <button class="tab-btn" id="btn-rental" onclick="switchTab('rental')">Self Drive</button>
+      <button class="tab-btn" id="btn-packages" onclick="switchTab('packages')">Tour Package</button>
+    </div>
+  </div>
+</div>
+
+<div id="oneway" class="form-section active">
+  <div class="container">
+    <div class="form-container">
+      <h2 class="form-title">One Way Trip</h2>
+      
+      <div class="free-perk">
+        <i class="fas fa-mug-hot"></i> Free Tea & Coffee Included
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="name_oneway" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp Number</label>
+          <input type="tel" class="form-input" id="phone_oneway" placeholder="10 digits" maxlength="10" required>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Pickup</label>
+          <input type="text" class="form-input" id="pickup_oneway" placeholder="From where?" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Destination</label>
+          <input type="text" class="form-input" id="dest_oneway" placeholder="Going where?" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-input" id="date_oneway" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Choose Car</label>
+        <div class="car-grid">
+          <div class="car-card active" data-car="dzire" onclick="selectCar(this)">
+            <div class="car-name">Dzire</div>
+            <div class="car-price">₹12/km</div>
+          </div>
+          <div class="car-card" data-car="innova" onclick="selectCar(this)">
+            <div class="car-name">Innova</div>
+            <div class="car-price">₹18/km</div>
+          </div>
+          <div class="car-card" data-car="ertiga" onclick="selectCar(this)">
+            <div class="car-name">Ertiga</div>
+            <div class="car-price">₹15/km</div>
+          </div>
+          <div class="car-card" data-car="scorpio" onclick="selectCar(this)">
+            <div class="car-name">Scorpio</div>
+            <div class="car-price">₹18/km</div>
+          </div>
+          <div class="car-card" data-car="crysta" onclick="selectCar(this)">
+            <div class="car-name">Innova Crysta</div>
+            <div class="car-price">₹20/km</div>
+          </div>
+          <div class="car-card" data-car="carens" onclick="selectCar(this)">
+            <div class="car-name">Kia Carens</div>
+            <div class="car-price">₹16/km</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Passengers</label>
+        <div class="count-controls">
+          <button class="count-btn" onclick="updateCount('passenger_oneway', -1)">-</button>
+          <span id="passenger_oneway" class="count-value">1</span>
+          <button class="count-btn" onclick="updateCount('passenger_oneway', 1)">+</button>
+        </div>
+      </div>
+      <div class="submit-section">
+        <button class="submit-btn" onclick="submitBooking('oneway')">
+          <i class="fab fa-whatsapp"></i> Send WhatsApp Booking
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="round" class="form-section">
+  <div class="container">
+    <div class="form-container">
+      <h2 class="form-title">Round Trip</h2>
+      
+      <div class="free-perk">
+        <i class="fas fa-mug-hot"></i> Free Tea & Coffee Included
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="name_round" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp Number</label>
+          <input type="tel" class="form-input" id="phone_round" placeholder="10 digits" maxlength="10" required>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Pickup</label>
+          <input type="text" class="form-input" id="pickup_round" placeholder="From where?" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Destination</label>
+          <input type="text" class="form-input" id="dest_round" placeholder="Going where?" required>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Departure Date</label>
+          <input type="date" class="form-input" id="date_depart" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Return Date</label>
+          <input type="date" class="form-input" id="date_return" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Daily Rent Charge (Auto-Calculated)</label>
+        <input type="text" class="form-input" id="daily_rent_round" value="₹1200/day" readonly style="background-color: #f1f5f9; color: #1f4fff; font-weight: 700;">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Choose Car</label>
+        <div class="car-grid">
+          <div class="car-card active" data-car="dzire" onclick="selectCar(this)">
+            <div class="car-name">Dzire</div><div class="car-price">₹11/km</div>
+          </div>
+          <div class="car-card" data-car="ertiga" onclick="selectCar(this)">
+            <div class="car-name">Ertiga</div><div class="car-price">₹13/km</div>
+          </div>
+          <div class="car-card" data-car="innova" onclick="selectCar(this)">
+            <div class="car-name">Innova</div><div class="car-price">₹14/km</div>
+          </div>
+          <div class="car-card" data-car="scorpio" onclick="selectCar(this)">
+            <div class="car-name">Scorpio</div><div class="car-price">₹14/km</div>
+          </div>
+          <div class="car-card" data-car="crysta" onclick="selectCar(this)">
+            <div class="car-name">Innova Crysta</div><div class="car-price">₹16/km</div>
+          </div>
+          <div class="car-card" data-car="carens" onclick="selectCar(this)">
+            <div class="car-name">Kia Carens</div><div class="car-price">₹14/km</div>
+          </div>
+        </div>
+      </div>
+      <div class="submit-section">
+        <button class="submit-btn" onclick="submitBooking('round')">
+          <i class="fab fa-whatsapp"></i> Send WhatsApp Booking
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="rental" class="form-section">
+  <div class="container">
+    <div class="form-container">
+      <h2 class="form-title">Car Rental</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="name_rental" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp Number</label>
+          <input type="tel" class="form-input" id="phone_rental" placeholder="10 digits" maxlength="10" required>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Booking Date</label>
+          <input type="date" class="form-input" id="date_rental" required>
+        </div>
+        <div class="form-group duration-input">
+          <label class="form-label">Duration (Days)</label>
+          <input type="number" class="form-input" id="duration_rental" min="1" max="30" value="1" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Choose Car</label>
+        <div class="car-grid">
+          <div class="car-card active" data-car="dzire" onclick="selectCar(this)">
+            <div class="car-name">Dzire</div><div class="car-price">₹2000/day</div>
+          </div>
+          <div class="car-card" data-car="ertiga" onclick="selectCar(this)">
+            <div class="car-name">Ertiga</div><div class="car-price">₹2500/day</div>
+          </div>
+          <div class="car-card" data-car="innova" onclick="selectCar(this)">
+            <div class="car-name">Innova</div><div class="car-price">₹3000/day</div>
+          </div>
+          <div class="car-card" data-car="scorpio" onclick="selectCar(this)">
+            <div class="car-name">Scorpio</div><div class="car-price">₹3000/day</div>
+          </div>
+          <div class="car-card" data-car="crysta" onclick="selectCar(this)">
+            <div class="car-name">Innova Crysta</div><div class="car-price">₹4000/day</div>
+          </div>
+          <div class="car-card" data-car="carens" onclick="selectCar(this)">
+            <div class="car-name">Kia Carens</div><div class="car-price">₹3000/day</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Driver Required?</label>
+        <select class="form-select" id="driver_rental">
+          <option value="Yes">Yes (Included)</option>
+          <option value="No">No (Self Drive)</option>
+        </select>
+      </div>
+      <div class="submit-section">
+        <button class="submit-btn" onclick="submitBooking('rental')">
+          <i class="fab fa-whatsapp"></i> Send WhatsApp Booking
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="packages" class="form-section">
+  <div class="container">
+    <div class="form-container">
+      <h2 class="form-title">Tour Packages</h2>
+      
+      <div class="free-perk">
+        <i class="fas fa-mug-hot"></i> Free Tea & Coffee Included
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="name_package" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp Number</label>
+          <input type="tel" class="form-input" id="phone_package" placeholder="10 digits" maxlength="10" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Travel Date</label>
+        <input type="date" class="form-input" id="date_package" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Select Package</label>
+        <div class="package-grid">
+          <div class="package-card active" data-pkg="jagdalpur" onclick="selectPackage(this)">
+            <div class="package-name">Jagdalpur</div>
+            <div class="package-price">₹14,999</div>
+            <div class="package-desc">3D/2N (3+1 Person)</div>
+          </div>
+          <div class="package-card" data-pkg="ambikapur" onclick="selectPackage(this)">
+            <div class="package-name">Ambikapur</div>
+            <div class="package-price">₹14,999</div>
+            <div class="package-desc">3D/2N (3+1 Person)</div>
+          </div>
+          <div class="package-card" data-pkg="raipur" onclick="selectPackage(this)">
+            <div class="package-name">Raipur City</div>
+            <div class="package-price">₹1,999</div>
+            <div class="package-desc">8 Hours (City Tour)</div>
+          </div>
+          <div class="package-card" data-pkg="selfdrive" onclick="selectPackage(this)">
+            <div class="package-name">Self Drive</div>
+            <div class="package-price">₹1,999</div>
+            <div class="package-desc">24 Hours (Rental)</div>
+          </div>
+        </div>
+      </div>
+      <div class="submit-section">
+        <button class="submit-btn" onclick="submitBooking('package')">
+          <i class="fab fa-whatsapp"></i> Book Package on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentTab = 'oneway';
+let selectedCar = 'dzire';
+let selectedPackage = 'jagdalpur'; // Default package
+
+// Round Trip Daily Rent Rates
+const roundTripDailyRates = {
+  'dzire': 1200,
+  'ertiga': 1500,
+  'innova': 1600,
+  'crysta': 2000,
+  'scorpio': 1600,
+  'carens': 1600
+};
+
+// --- 1. AUTO OPEN LOGIC (Based on URL) ---
+window.onload = function() {
+  const params = new URLSearchParams(window.location.search);
+  const pkg = params.get('package');
+  const car = params.get('car');
+
+  if (pkg) {
+    // If user clicked a package in Index.html
+    switchTab('packages');
+    // Auto-select the specific package card
+    const pkgCards = document.querySelectorAll('.package-card');
+    pkgCards.forEach(card => {
+      card.classList.remove('active');
+      if(card.dataset.pkg === pkg) {
+        card.classList.add('active');
+        selectedPackage = pkg;
+      }
+    });
+  } else if (car) {
+    // If user clicked a car in Index.html
+    switchTab('rental');
+    // Auto-select the car in Rental tab
+    const rentalGrid = document.querySelector('#rental .car-grid');
+    const carCards = rentalGrid.querySelectorAll('.car-card');
+    carCards.forEach(card => {
+      card.classList.remove('active');
+      if(card.dataset.car === car) {
+        card.classList.add('active');
+        selectedCar = car;
+      }
+    });
+  }
+};
+
+function switchTab(tab) {
+  document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  
+  document.getElementById(tab).classList.add('active');
+  
+  // Activate button
+  if(tab === 'oneway') document.getElementById('btn-oneway').classList.add('active');
+  if(tab === 'round') document.getElementById('btn-round').classList.add('active');
+  if(tab === 'rental') document.getElementById('btn-rental').classList.add('active');
+  if(tab === 'packages') document.getElementById('btn-packages').classList.add('active');
+  
+  currentTab = tab;
+}
+
+function updateCount(id, change) {
+  let count = parseInt(document.getElementById(id).textContent);
+  count = Math.max(1, count + change);
+  document.getElementById(id).textContent = count;
+}
+
+function selectCar(card) {
+  const currentCarGrid = card.closest('.form-section').querySelector('.car-grid');
+  currentCarGrid.querySelectorAll('.car-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  selectedCar = card.dataset.car;
+
+  // Logic for Round Trip Auto-Select Rate
+  if (currentTab === 'round') {
+    const rate = roundTripDailyRates[selectedCar];
+    if (rate) {
+      document.getElementById('daily_rent_round').value = `₹${rate}/day`;
+    }
+  }
+}
+
+function selectPackage(card) {
+  const grid = card.parentElement;
+  grid.querySelectorAll('.package-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  selectedPackage = card.dataset.pkg;
+}
+
+function submitBooking(type) {
+  const name = document.getElementById('name_' + type).value.trim();
+  const phone = document.getElementById('phone_' + type).value.trim();
+  
+  if (!name || !phone || phone.length !== 10) {
+    alert('❌ Please enter valid name & 10-digit WhatsApp number');
+    return;
+  }
+
+  let message = `🚗 *Shameem Tour & Travel - New Booking*
+
+`;
+  message += `👤 Name: ${name}
+`;
+  message += `📱 WhatsApp: ${phone}
+
+`;
+  
+  if(type === 'package') {
+    const date = document.getElementById('date_package').value;
+    
+    // Get Package details text
+    let pkgNameText = selectedPackage.toUpperCase();
+    let pkgPriceText = "Check Price";
+    // Find active card to get real name
+    document.querySelectorAll('.package-card.active').forEach(c => {
+       pkgNameText = c.querySelector('.package-name').innerText;
+       pkgPriceText = c.querySelector('.package-price').innerText;
+    });
+
+    message += `📦 *PACKAGE BOOKING*
+`;
+    message += `🏷️ Package: ${pkgNameText}
+`;
+    message += `💰 Price: ${pkgPriceText}
+`;
+    message += `📅 Travel Date: ${date}
+`;
+    message += `☕ Offer: Free Tea & Coffee included
+`;
+  
+  } else {
+    // Normal Car Booking
+    message += `📋 *Service*: ${type.toUpperCase().replace('_', ' ')}
+`;
+    
+    if(type === 'oneway') {
+      const pickup = document.getElementById('pickup_oneway').value;
+      const dest = document.getElementById('dest_oneway').value;
+      const date = document.getElementById('date_oneway').value;
+      const passengers = document.getElementById('passenger_oneway').textContent;
+      message += `📍 Pickup: ${pickup}
+`;
+      message += `📍 Destination: ${dest}
+`;
+      message += `📅 Date: ${date}
+`;
+      message += `👥 Passengers: ${passengers}
+`;
+      message += `☕ Offer: Free Tea & Coffee included
+`;
+    } else if(type === 'round') {
+      const pickup = document.getElementById('pickup_round').value;
+      const dest = document.getElementById('dest_round').value;
+      const depart = document.getElementById('date_depart').value;
+      const ret = document.getElementById('date_return').value;
+      const dailyRent = document.getElementById('daily_rent_round').value; // Get rent value
+      
+      message += `📍 Pickup: ${pickup}
+`;
+      message += `📍 Destination: ${dest}
+`;
+      message += `📅 Departure: ${depart}
+`;
+      message += `📅 Return: ${ret}
+`;
+      message += `💵 Daily Charge: ${dailyRent}
+`;
+      message += `☕ Offer: Free Tea & Coffee included
+`;
+    } else if(type === 'rental') {
+      const date = document.getElementById('date_rental').value;
+      const duration = document.getElementById('duration_rental').value;
+      const driver = document.getElementById('driver_rental').value;
+      message += `📅 Booking Date: ${date}
+`;
+      message += `⏱️ Duration: ${duration} days
+`;
+      message += `🚗 Driver: ${driver}
+`;
+    }
+    message += `
+🚙 *Car Preference*: ${selectedCar.toUpperCase()}
+`;
+  }
+  
+  message += `📲 Please confirm availability & price`;
+
+  const whatsapp1 = `https://wa.me/919076690347?text=${encodeURIComponent(message)}`;
+  const whatsapp2 = `https://wa.me/917879300388?text=${encodeURIComponent(message)}`;
+  
+  window.open(whatsapp1, '_blank');
+}
+</script>
+
+</body>
+</html>

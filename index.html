@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Shameem Tour Travels - Cosmic Edition</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #FFC107;      
+            --text-dark: #ffffff; /* Changed to white for better contrast on transparent bg */
+            --text-grey: #cccccc;
+            /* ULTRA TRANSPARENT GLASS VARIABLE */
+            --glass-panel: rgba(0, 0, 0, 0.25); 
+            --glass-card: rgba(255, 255, 255, 0.08);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: #111; 
+            height: 100dvh; 
+            width: 100%; overflow: hidden;
+            display: flex; flex-direction: column;
+            color: white;
+        }
+
+        /* --- THREE.JS CANVAS --- */
+        #webgl-canvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; opacity: 0.6; pointer-events: none; mix-blend-mode: screen;
+        }
+
+        /* --- BACKGROUND SLIDER CONTAINER --- */
+        .bg-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+        
+        .slide-item {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center; 
+            visibility: hidden; 
+            will-change: clip-path, transform;
+        }
+        
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* Lighter overlay at bottom to allow transparency to shine */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%);
+            z-index: 1; pointer-events: none;
+        }
+
+        /* --- UI CONTAINER --- */
+        #ui {
+            position: relative; z-index: 10; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: space-between;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            overflow-y: auto; scrollbar-width: none;
+        }
+        #ui::-webkit-scrollbar { display: none; }
+
+        /* --- TOP BAR --- */
+        .top-bar { 
+            padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; 
+            width: 100%; flex-shrink: 0; 
+        }
+        .time-widget { display: flex; flex-direction: column; }
+        .clock { font-size: 24px; font-weight: 800; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .date { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 600; }
+        
+        .weather-pill {
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 5px 12px; border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; gap: 6px;
+            font-size: 11px; color: #fff; font-weight: 700;
+        }
+
+        /* --- MASK REVEAL BRANDING --- */
+        .quote-box {
+            padding: 0 25px; width: 100%;
+            display: flex; flex-direction: column; align-items: flex-start;
+            flex-grow: 1; justify-content: center; margin-bottom: 20px;
+        }
+
+        .brand-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .app-logo { width: 50px; height: auto; filter: drop-shadow(0 0 10px rgba(255,193,7,0.6)); }
+        
+        .company-name {
+            font-size: 18px; font-weight: 800; color: #fff; line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); max-width: 220px;
+        }
+
+        .mask-container { overflow: hidden; position: relative; margin-bottom: 5px; }
+        
+        .quote-main {
+            font-size: clamp(36px, 8vw, 56px); font-weight: 800; color: #fff; 
+            line-height: 1; transform: translateY(100%); letter-spacing: -1px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .quote-sub-wrapper { overflow: hidden; margin-top: 8px; }
+        .quote-sub {
+            display: inline-block; font-size: 13px; color: #000; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 1px; 
+            background: var(--primary); padding: 5px 14px; border-radius: 4px;
+            transform: translateY(100%);
+        }
+
+        /* --- BOTTOM PANEL (ULTRA TRANSPARENT) --- */
+        .bottom-panel {
+            background: var(--glass-panel); /* Ultra transparent dark glass */
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px 25px 0 0; padding: 25px 20px 30px; 
+            box-shadow: var(--shadow);
+            flex-shrink: 0; width: 100%;
+            transform: translateY(100%);
+        }
+        
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .panel-title { font-size: 15px; color: #fff; font-weight: 800; letter-spacing: 0.5px; }
+        .scroll-indicator { font-size: 10px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 5px; }
+        .scroll-indicator i { animation: bounce 1.5s infinite; }
+
+        .card-container { display: flex; gap: 10px; margin-bottom: 15px; }
+
+        /* Transparent Cards */
+        .select-card {
+            flex: 1; background: var(--glass-card); 
+            border-radius: 16px; padding: 15px 10px;
+            text-align: center; cursor: pointer; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: var(--transition); position: relative;
+        }
+        .select-card:active { transform: scale(0.96); }
+        
+        .select-card .icon-box {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;
+            font-size: 18px; color: #fff; transition: var(--transition);
+        }
+        
+        .select-card.active { border-color: var(--primary); background: rgba(255, 193, 7, 0.15); }
+        .select-card.active .icon-box { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255, 193, 7, 0.6); }
+        
+        .select-card h3 { font-size: 13px; font-weight: 800; color: #fff; }
+        .select-card p { font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+
+        /* Locked State */
+        .locked-card { opacity: 0.7; }
+        .check-badge {
+            position: absolute; top: 8px; right: 8px; width: 16px; height: 16px;
+            background: var(--primary); color: #000; border-radius: 50%;
+            font-size: 9px; display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: scale(0); transition: var(--transition);
+        }
+        .select-card.active .check-badge { opacity: 1; transform: scale(1); }
+
+        /* --- POP UP BUTTON --- */
+        .continue-btn {
+            width: 100%; padding: 16px; background: #fff; color: #000; border: none; border-radius: 14px;
+            font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+            gap: 8px; 
+            display: none; opacity: 0; transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .continue-btn.pop-visible { display: flex; opacity: 1; transform: translateY(0); pointer-events: all; }
+        .continue-btn.ready { background: var(--primary); color: #000; box-shadow: 0 0 20px rgba(255, 193, 7, 0.4); }
+        .continue-btn.locked-btn { background: rgba(255,255,255,0.2); color: #aaa; cursor: not-allowed; }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+
+        @media (max-height: 700px) {
+            .quote-box { margin-bottom: 10px; }
+            .bottom-panel { padding-top: 20px; padding-bottom: 25px; }
+            .quote-main { font-size: 32px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="webgl-canvas"></canvas>
+
+    <div class="bg-slider" id="bgSlider">
+        <div class="slide-item slide-1"></div>
+        <div class="slide-item slide-2"></div>
+        <div class="slide-item slide-3"></div>
+        <div class="slide-item slide-4"></div>
+        <div class="slide-item slide-5"></div>
+        <div class="slide-item slide-6"></div>
+    </div>
+    
+    <div class="overlay"></div>
+
+    <div id="ui">
+        <div class="top-bar">
+            <div class="time-widget">
+                <span class="clock" id="clock">--:--</span>
+                <span class="date" id="date">...</span>
+            </div>
+            <div class="weather-pill">
+                <i class="fas fa-sun" style="color:#FFC107;"></i> 
+                <span id="tempDisplay">--°C</span>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <div class="brand-header">
+                <img src="20251214_061918.png" alt="Logo" class="app-logo">
+                <h1 class="company-name">Shameem Tour & Travels</h1>
+            </div>
+
+            <div class="mask-container">
+                <div class="quote-main" id="quoteMain">Welcome</div>
+            </div>
+            <div class="quote-sub-wrapper">
+                <div class="quote-sub" id="quoteSub">To Chhattisgarh</div>
+            </div>
+        </div>
+
+        <div class="bottom-panel">
+            <div class="panel-header">
+                <div class="panel-title">Select Role</div>
+                <div class="scroll-indicator">Swipe <i class="fas fa-chevron-up"></i></div>
+            </div>
+
+            <div class="card-container">
+                <div class="select-card" id="cardCustomer" onclick="selectOption('customer')">
+                    <div class="check-badge"><i class="fas fa-check"></i></div>
+                    <div class="icon-box"><i class="fas fa-user"></i></div>
+                    <h3>Customer</h3>
+                    <p>Book Ride</p>
+                </div>
+
+                <div class="select-card locked-card" onclick="triggerLock()">
+                    <div class="check-badge" style="background:rgba(255,255,255,0.2); color:#fff; opacity:1; transform:scale(1);"><i class="fas fa-lock"></i></div>
+                    <div class="icon-box"><i class="fas fa-id-card"></i></div>
+                    <h3>Partner</h3>
+                    <p>Soon</p>
+                </div>
+            </div>
+
+            <button class="continue-btn" id="actionBtn" onclick="proceed()">
+                <span id="btnText">Select an Option</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        // --- UPDATED DATA WITH WORKING LINKS (CHHATTISGARH & INDIA) ---
+        const slidesData = [
+            { 
+                img: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=2070&auto=format&fit=crop', // Chitrakote Falls style
+                main: "Chitrakote Falls", 
+                sub: "Pride of Chhattisgarh" 
+            },
+            { 
+                img: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2070&auto=format&fit=crop', // Taj Mahal
+                main: "Taj Mahal", 
+                sub: "Symbol of Love" 
+            },
+
+            { 
+                img: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=2070&auto=format&fit=crop', // Jaipur
+                main: "Royal Rajasthan", 
+                sub: "Explore History" 
+            },
+            { 
+                img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop', // Scenic Nature
+                main: "Scenic Travel", 
+                sub: "Nature at its Best" 
+            },
+            { 
+                img: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=2070&auto=format&fit=crop', // Kerala
+                main: "Kerala Views", 
+                sub: "God's Own Country" 
+            }
+        ];
+
+        // --- 1. THREE.JS PARTICLES ---
+        const canvas = document.getElementById('webgl-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.z = 5;
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 700;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 15;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const material = new THREE.PointsMaterial({ size: 0.02, color: 0xFFC107, transparent: true, opacity: 0.8 });
+        const particlesMesh = new THREE.Points(particlesGeometry, material);
+        scene.add(particlesMesh);
+
+        let scrollSpeed = 0;
+        function animateThree() {
+            requestAnimationFrame(animateThree);
+            particlesMesh.rotation.y += 0.001; particlesMesh.rotation.x += 0.0005;
+            particlesMesh.position.y -= scrollSpeed * 0.05;
+            scrollSpeed *= 0.95;
+            renderer.render(scene, camera);
+        }
+        animateThree();
+
+        // --- 2. GSAP SLIDER LOGIC ---
+        const sliderContainer = document.getElementById('bgSlider');
+        let currentIdx = 0;
+        let isAnimating = false;
+        let autoPlayTimer;
+
+        // Create Slides dynamically based on data
+        sliderContainer.innerHTML = ''; // Clear existing
+        slidesData.forEach((item, index) => {
+            let div = document.createElement('div');
+            div.className = `slide-item`;
+            div.style.backgroundImage = `url('${item.img}')`;
+            div.style.zIndex = index === 0 ? 2 : 1;
+            sliderContainer.appendChild(div);
+        });
+        
+        const slides = document.querySelectorAll('.slide-item');
+
+        window.onload = () => {
+            gsap.set(slides[0], { visibility: 'visible', clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" });
+            animateTextIn(slidesData[0].main, slidesData[0].sub);
+            gsap.to(".bottom-panel", { y: "0%", duration: 1, delay: 0.8, ease: "power4.out" });
+            startAutoPlay();
+        };
+
+        function startAutoPlay() {
+            autoPlayTimer = setInterval(() => { changeSlide('next'); }, 5000);
+        }
+        function resetAutoPlay() {
+            clearInterval(autoPlayTimer);
+            startAutoPlay();
+        }
+
+        function animateTextIn(mainText, subText) {
+            document.getElementById('quoteMain').innerText = mainText;
+            document.getElementById('quoteSub').innerText = subText;
+            const tl = gsap.timeline();
+            tl.fromTo("#quoteMain", { y: "120%", skewY: 10 }, { y: "0%", skewY: 0, duration: 0.8, ease: "power4.out" })
+              .fromTo("#quoteSub", { y: "120%" }, { y: "0%", duration: 0.6, ease: "back.out(1.7)" }, "-=0.6");
+        }
+
+        function changeSlide(direction) {
+            if(isAnimating) return;
+            isAnimating = true;
+            scrollSpeed = direction === 'next' ? 2 : -2;
+
+            const currentSlide = slides[currentIdx];
+            let nextIdx = (direction === 'next') ? (currentIdx + 1) % slidesData.length : (currentIdx - 1 + slidesData.length) % slidesData.length;
+            const nextSlide = slides[nextIdx];
+
+            const tl = gsap.timeline();
+            tl.to("#quoteMain", { y: "-120%", skewY: -10, duration: 0.4, ease: "power2.in" })
+              .to("#quoteSub", { y: "120%", duration: 0.3, ease: "power2.in" }, "-=0.4");
+
+            gsap.set(nextSlide, { visibility: 'visible', clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)", zIndex: 2, scale: 1.1 });
+            gsap.set(currentSlide, { zIndex: 1 });
+
+            gsap.to(nextSlide, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", scale: 1, duration: 1.4, ease: "expo.inOut",
+                onComplete: () => {
+                    gsap.set(currentSlide, { visibility: 'hidden', zIndex: 0 });
+                    currentIdx = nextIdx; isAnimating = false;
+                }
+            });
+            setTimeout(() => { animateTextIn(slidesData[nextIdx].main, slidesData[nextIdx].sub); }, 800);
+        }
+
+        // --- 3. SCROLL INTERACTION ---
+        let touchStartY = 0; let touchEndY = 0;
+        window.addEventListener('wheel', (e) => { resetAutoPlay(); if (e.deltaY > 0) changeSlide('next'); else changeSlide('prev'); });
+        window.addEventListener('touchstart', e => { touchStartY = e.changedTouches[0].screenY; });
+        window.addEventListener('touchend', e => {
+            touchEndY = e.changedTouches[0].screenY; resetAutoPlay();
+            if (touchStartY - touchEndY > 50) changeSlide('next');
+            if (touchEndY - touchStartY > 50) changeSlide('prev');
+        });
+
+        // --- 4. UI LOGIC ---
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours(); let min = now.getMinutes(); let ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; min = min < 10 ? '0'+min : min;
+            document.getElementById('clock').innerText = `${hours}:${min} ${ampm}`;
+            document.getElementById('date').innerText = now.toLocaleDateString('en-US', {weekday:'short', day:'numeric', month:'short'});
+        }
+        setInterval(updateClock, 1000); updateClock();
+
+        let selectedType = null;
+        
+        function selectOption(type) {
+            selectedType = type;
+            document.getElementById('cardCustomer').classList.add('active');
+            
+            const btn = document.getElementById('actionBtn');
+            const btnText = document.getElementById('btnText');
+            
+            // Show Button Logic
+            btn.classList.add('pop-visible'); 
+            btn.classList.add('ready');       
+            btn.classList.remove('locked-btn');
+            btnText.innerText = "Continue as Customer";
+        }
+
+        function triggerLock() {
+            const card = document.querySelector('.locked-card');
+            gsap.to(card, { x: -5, duration: 0.1, yoyo: true, repeat: 3 });
+            
+            const btn = document.getElementById('actionBtn');
+            const btnText = document.getElementById('btnText');
+            
+            document.getElementById('cardCustomer').classList.remove('active');
+            
+            btn.classList.add('pop-visible');
+            btn.classList.remove('ready');
+            btn.classList.add('locked-btn');
+            btnText.innerText = "Feature Locked 🔒";
+            
+            selectedType = null;
+        }
+
+        function proceed() {
+            if(selectedType) {
+                const btn = document.getElementById('actionBtn');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                gsap.to(".bottom-panel", { y: "100%", duration: 0.5 });
+                gsap.to(".quote-box", { opacity: 0, duration: 0.5 });
+                setTimeout(() => { window.location.href = 'customer-dashboard.html'; }, 1000);
+            }
+        }
+
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=21.25&longitude=81.63&current_weather=true')
+            .then(r => r.json())
+            .then(data => document.getElementById('tempDisplay').innerText = Math.round(data.current_weather.temperature) + "°C")
+            .catch(() => document.getElementById('tempDisplay').innerText = "28°C");
+
+    </script>
+</body>
+</html>

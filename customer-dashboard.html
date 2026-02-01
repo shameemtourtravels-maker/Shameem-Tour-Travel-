@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shameem Tour & Travel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="HXMn0P73aVaSvlJ2KOAekGF4Rd6vUVy_cFtgO1m_jXE" />
+<meta name="description" content="Shameem Tour & Travel - All India Taxi Booking Narnaund Haryana. +91 90766 90347. 24x7 Service Chhattisgarh 33 Districts.">
+<meta name="keywords" content="taxi narnaund, shameem tour travel, all india taxi, car rental haryana, chhattisgarh taxi, innova crysta booking, ertiga taxi">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* BASE RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* --- 1. BACKGROUND ANIMATION --- */
+body { 
+  font-family:'Inter', sans-serif; 
+  line-height:1.6; 
+  overflow-x:hidden; 
+  background: linear-gradient(-45deg, #f8f9fa, #e0e7ff, #f0fdf4, #f8f9fa);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container { max-width:1400px; margin:0 auto; padding:0 24px; }
+
+/* --- 2. SCROLL REVEAL ANIMATION CSS --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* PRELOADER */
+#preloader {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: #ffffff; z-index: 9999;
+  display: flex; justify-content: center; align-items: center;
+  transition: opacity 0.5s ease;
+}
+.preloader-content { text-align: center; animation: pulse-logo 0.8s infinite; }
+.preloader-img { width: 80px; margin-bottom: 10px; }
+.preloader-text {
+  font-size: 20px; font-weight: 800;
+  background: linear-gradient(135deg,#1f4fff,#667eea); 
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+@keyframes pulse-logo {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* BUTTON ANIMATIONS */
+@keyframes pulse-blue {
+  0% { box-shadow: 0 0 0 0 rgba(31, 79, 255, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(31, 79, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(31, 79, 255, 0); }
+}
+
+/* HEADER */
+.header { 
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); position:fixed; 
+  top:0; left:0; right:0; z-index:1000; padding:12px 0; box-shadow:0 2px 40px rgba(0,0,0,0.08);
+}
+.nav { display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; }
+.logo-container { display:flex; align-items:center; gap:12px; }
+.logo-img { height:40px; width:auto; }
+.logo-text { 
+  font-size:24px; font-weight:800; background:linear-gradient(135deg,#1f4fff,#667eea); 
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; white-space: nowrap;
+}
+.nav-links { display:flex; gap:32px; }
+.nav-links a { color:#1f2937; text-decoration:none; font-weight:500; font-size:15px; transition:all 0.3s; }
+.nav-links a:hover { color:#1f4fff; }
+
+/* Book Now Highlight Animation */
+@keyframes glow-text {
+  0% { text-shadow: 0 0 5px rgba(31, 79, 255, 0.2); }
+  50% { text-shadow: 0 0 15px rgba(31, 79, 255, 0.6); color: #1f4fff; }
+  100% { text-shadow: 0 0 5px rgba(31, 79, 255, 0.2); }
+}
+.book-now-highlight {
+  color:#1f4fff !important; 
+  font-weight:700 !important;
+  animation: glow-text 2s infinite ease-in-out;
+  position: relative;
+}
+.book-now-highlight::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #1f4fff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+.book-now-highlight:hover::after {
+  transform: scaleX(1);
+}
+
+
+.cta-hero { 
+  background:linear-gradient(135deg,#1f4fff,#667eea); 
+  color:#fff; padding:10px 24px; border-radius:25px; 
+  font-weight:600; font-size:15px; text-decoration:none; 
+  box-shadow:0 6px 20px rgba(31,79,255,0.3); 
+  transition:all 0.3s; display:inline-flex; align-items:center; gap:8px;
+  animation: pulse-blue 2s infinite;
+}
+
+/* HERO SECTION */
+.hero { 
+  /* NEW BACKGROUND IMAGE LINK */
+  background:linear-gradient(135deg,rgba(0,0,0,0.4),rgba(0,0,0,0.2)), 
+  url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover; 
+  min-height:100vh; display:flex; align-items:center; padding-top:80px; position:relative;
+}
+.hero-content { max-width:1000px; margin:0 auto; text-align:center; color:#fff; padding:0 24px; width: 100%; }
+.hero-title { 
+  font-size:clamp(2.5rem, 8vw, 7.5rem); font-weight:800; letter-spacing:-1px; 
+  margin-bottom:1rem; line-height:1.1; 
+  /* Adjusted for better visibility on image */
+  text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  color: #fff;
+}
+.hero-subtitle { 
+  font-size:clamp(1rem, 3.5vw, 2.2rem); font-weight:300; margin-bottom:3rem; 
+  opacity:0.95; max-width:800px; margin-left:auto; margin-right:auto;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.hero-buttons { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; max-width:600px; margin:0 auto; }
+.hero-btn-primary, .hero-btn-secondary { 
+  padding:16px 32px; border-radius:50px; 
+  font-size:16px; font-weight:600; text-decoration:none; 
+  transition:all 0.4s; display:inline-flex; align-items:center; justify-content: center; gap:12px;
+}
+.hero-btn-primary { background:#fff; color:#1f2937; box-shadow:0 12px 40px rgba(255,255,255,0.3); }
+.hero-btn-secondary { background:linear-gradient(135deg,#ff6b6b,#ff8e8e); color:#fff; box-shadow:0 12px 40px rgba(255,107,107,0.4); }
+
+/* SCROLL INDICATOR */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  animation: bounce 2s infinite;
+  opacity: 0.8;
+}
+.mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid white;
+  border-radius: 20px;
+  position: relative;
+  margin-bottom: 5px;
+}
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: white;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 1.5s infinite;
+}
+.scroll-text {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+  40% {transform: translateX(-50%) translateY(-10px);}
+  60% {transform: translateX(-50%) translateY(-5px);}
+}
+@keyframes scrollWheel {
+  0% { top: 6px; opacity: 1; }
+  100% { top: 20px; opacity: 0; }
+}
+
+
+/* SERVICES */
+.services { padding:80px 0; background: transparent; }
+.services-title { font-size:clamp(2rem,5vw,3.5rem); font-weight:700; color:#1f2937; margin-bottom:3rem; text-align:center; }
+.services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; }
+.service-card { 
+  background:rgba(255,255,255,0.8); backdrop-filter: blur(10px); 
+  padding:32px 24px; border-radius:24px; box-shadow:0 10px 40px rgba(0,0,0,0.05); 
+  text-align:center; transition:transform 0.3s;
+}
+.service-icon { font-size:48px; margin-bottom:20px; display:block; }
+.service-icon-oneway { color:#1f4fff; }
+.service-icon-round { color:#ff6b6b; }
+.service-icon-rental { color:#10b981; }
+.service-title { font-size:20px; font-weight:700; color:#1f2937; margin-bottom:12px; }
+
+/* --- VIDEO SECTION STYLE (NEW) --- */
+.video-section { padding: 40px 0 80px 0; }
+.video-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  /* Premium Border & Shadow */
+  border: 10px solid #ffffff;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+  background: #000;
+}
+.promo-video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* TOUR PACKAGES */
+.packages { padding: 40px 0 80px 0; }
+.packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.package-card { 
+  background: #ffffff; 
+  border-radius: 20px; 
+  overflow: hidden; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.package-card:hover { 
+  transform: translateY(-10px); 
+  box-shadow: 0 20px 40px rgba(31, 79, 255, 0.15); 
+}
+.package-image-wrapper { position: relative; height: 220px; overflow: hidden; }
+.package-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.package-card:hover .package-img { transform: scale(1.05); }
+.package-badge {
+  position: absolute; top: 15px; right: 15px;
+  background: rgba(255,255,255,0.9); padding: 5px 12px;
+  border-radius: 20px; font-size: 12px; font-weight: 700; color: #1f4fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.package-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+.package-title { font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 15px; }
+.package-info { 
+  list-style: none; margin-bottom: 20px; flex-grow: 1;
+}
+.package-info li { 
+  display: flex; align-items: center; gap: 10px; 
+  color: #6b7280; font-size: 0.95rem; margin-bottom: 8px; 
+}
+.package-info i { color: #1f4fff; width: 20px; text-align: center; }
+.package-price-row { 
+  display: flex; justify-content: space-between; align-items: center; 
+  margin-top: auto; padding-top: 20px; border-top: 1px solid #f0f0f0; 
+}
+.package-price { font-size: 1.4rem; font-weight: 800; color: #1f2937; }
+.package-btn { 
+  background: linear-gradient(135deg,#1f4fff,#667eea); color: #fff; 
+  padding: 10px 20px; border-radius: 12px; font-size: 0.9rem; 
+  font-weight: 600; text-decoration: none; transition: opacity 0.3s; 
+}
+
+/* CAR FLEET SECTION STYLES */
+.fleet { padding: 60px 0 80px 0; background: #fff; }
+.fleet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+.fleet-card {
+  background: #f8f9fa;
+  border-radius: 24px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.03);
+  transition: all 0.4s ease;
+  position: relative;
+}
+.fleet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: rgba(31,79,255,0.2);
+}
+.fleet-img-wrapper {
+  height: 180px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #fff;
+  padding: 10px;
+}
+.fleet-img {
+  max-width: 90%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.fleet-card:hover .fleet-img { transform: scale(1.1); }
+.fleet-info { padding: 20px; }
+.fleet-name { font-size: 1.25rem; font-weight: 800; color: #1f2937; margin-bottom: 5px; }
+.fleet-type { font-size: 0.9rem; color: #6b7280; margin-bottom: 15px; font-weight: 500; }
+.fleet-features { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+.fleet-feature { font-size: 0.85rem; color: #1f4fff; font-weight: 600; background: rgba(31,79,255,0.08); padding: 5px 10px; border-radius: 8px; }
+.fleet-btn {
+  display: block; width: 100%; padding: 12px; 
+  border: 2px solid #1f4fff; border-radius: 12px;
+  color: #1f4fff; font-weight: 700; text-decoration: none;
+  transition: all 0.3s;
+}
+.fleet-card:hover .fleet-btn { background: #1f4fff; color: white; }
+
+/* STATS */
+.stats { padding:80px 0; background:#f0fdf4; }
+.stats-grid { 
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:30px; 
+  text-align:center; max-width:800px; margin:0 auto;
+}
+.stat-number { 
+  font-size:clamp(2rem,6vw,4.5rem); font-weight:800; 
+  background:linear-gradient(135deg,#1f4fff,#667eea); -webkit-background-clip:text; 
+  -webkit-text-fill-color:transparent; display:block; margin-bottom:4px;
+}
+.stat-label { font-size:14px; color:#6b7280; font-weight:600; text-transform:uppercase; }
+
+/* MODAL & FOOTER STYLES */
+.states-modal { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:2000; backdrop-filter:blur(5px); }
+.states-content { 
+  background:#fff; margin:20px auto; padding:24px; border-radius:24px; max-width:600px; 
+  width: 90%; max-height:85vh; overflow-y:auto; position: relative; top: 5%;
+}
+.states-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; margin-top: 20px;}
+.state-tag { background:#f0f4ff; color:#1f4fff; padding:10px; border-radius:12px; font-size:14px; font-weight:600; text-align:center; border: 1px solid rgba(31,79,255,0.1); }
+.close-modal { position:absolute; top:15px; right:20px; font-size:32px; color:#333; cursor:pointer; font-weight: bold; }
+
+.footer { 
+  background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); 
+  color:#e2e8f0; padding:60px 24px 30px; position:relative; overflow:hidden;
+}
+.footer::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#1f4fff,#ff6b6b,#10b981,#1f4fff); }
+.footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:40px; margin-bottom:40px; }
+.footer-card h3 { font-size:22px; margin-bottom:20px; color:#fff; font-weight:700; }
+.footer-card p, .footer-card li { font-size:15px; opacity:0.9; line-height:1.6; margin-bottom:10px; }
+.contact-numbers { font-size:18px; font-weight:700; color:#fff; margin:16px 0; }
+.social-icons { display:flex; gap:12px; margin-top:20px; flex-wrap: wrap; }
+.social-icons a { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; color: white; text-decoration: none; }
+.social-whatsapp { background:#25D366; }
+.social-instagram { background:linear-gradient(135deg,#E4405F,#F77737); }
+.social-facebook { background:#1877F2; }
+.social-email { background:#EA4335; }
+.service-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.service-tag { background:rgba(255,255,255,0.1); padding:8px 16px; border-radius:20px; font-size: 14px; cursor:pointer; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; text-align:center; font-size:13px; opacity:0.8; }
+
+/* MOBILE COMPACT OPTIMIZATION */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .header { padding: 12px 0; }
+  .nav { flex-direction: column; gap: 16px; }
+  .logo-text { font-size: 20px; }
+  .nav-links { gap: 20px; font-size: 14px; width: 100%; justify-content: center; }
+  .cta-hero { display: none; } 
+  .hero { padding-top: 130px; align-items: flex-start; text-align: center; }
+  .hero-title { font-size: 2.8rem; margin-bottom: 12px; }
+  .hero-subtitle { font-size: 1.1rem; margin-bottom: 2rem; }
+  .hero-buttons { flex-direction: column; gap: 12px; width: 100%; }
+  .hero-btn-primary, .hero-btn-secondary { width: 100%; padding: 14px; }
+  .services, .stats, .packages, .fleet, .video-section { padding: 50px 0; }
+  .services-title { margin-bottom: 2rem; font-size: 2rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .stat-icon { font-size: 32px; }
+  .stat-number { font-size: 2rem; }
+  .footer { padding: 40px 16px 20px; }
+  .footer-grid { gap: 32px; }
+  .social-icons { justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-content">
+    <img src="20251214_061918.png" alt="Loading..." class="preloader-img">
+    <div class="preloader-text">Shameem Tour & Travel</div>
+  </div>
+</div>
+
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="./index.html" class="logo-container">
+        <img src="20251214_061918.png" alt="Logo" class="logo-img">
+        <span class="logo-text">Shameem Tour & Travel</span>
+      </a>
+      <div class="nav-links">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./book-now.html" class="book-now-highlight">Book Now</a>
+      </div>
+      <a href="./book-now.html" class="cta-hero" style="display:none;"> 
+        <i class="fas fa-car"></i> Book Now
+      </a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content reveal">
+    <h1 class="hero-title">Shameem Tour & Travel</h1>
+    <p class="hero-subtitle">28 States | Chhattisgarh 33 Districts Special | Safe Journeys Since 2020</p>
+    <div class="hero-buttons">
+      <a href="./book-now.html" class="hero-btn-primary">
+        <i class="fas fa-route"></i> Book One Way
+      </a>
+      <a href="./book-now.html#rental" class="hero-btn-secondary">
+        <i class="fas fa-car"></i> Car Rental
+      </a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="mouse"><div class="wheel"></div></div>
+    <span class="scroll-text">Scroll Down</span>
+  </div>
+</section>
+
+<section class="services">
+  <div class="container">
+    <h2 class="services-title reveal">Our Services</h2>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <i class="fas fa-route service-icon service-icon-oneway"></i>
+        <h3 class="service-title">One Way Trip</h3>
+        <p>Door-to-door service across Chhattisgarh 33 districts & pan-India coverage</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-exchange-alt service-icon service-icon-round"></i>
+        <h3 class="service-title">Round Trip Driver</h3>
+        <p>Complete return journeys with professional drivers. AC vehicles guaranteed</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-car-side service-icon service-icon-rental"></i>
+        <h3 class="service-title">Car Rental Driver</h3>
+        <p>Self-drive or chauffeur-driven. Daily/weekly rentals. Fuel + insurance included</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="video-section reveal">
+  <div class="container">
+    <h2 class="services-title">Experience the Journey</h2>
+    <div class="video-wrapper">
+      <video class="promo-video" controls autoplay muted loop playsinline>
+        <source src="2026_01_07_10_16_42.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+ </section>  
+<section class="packages">  
+  <div class="container">  
+    <h2 class="services-title reveal">Featured Tour Packages</h2>  
+    <div class="packages-grid reveal">  
+      <div class="package-card">  
+        <div class="package-image-wrapper">  
+          <img src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=1000&auto=format&fit=crop" alt="Jagdalpur Tour" class="package-img">  
+          <span class="package-badge">Bestseller</span>  
+        </div>  
+        <div class="package-content">  
+          <h3 class="package-title">Jagdalpur Tour Package</h3>  
+          <ul class="package-info">  
+            <li><i class="fas fa-clock"></i> 3 Days / 2 Nights</li>  
+            <li><i class="fas fa-user-friends"></i> Capacity: 3+1 Person</li>  
+            <li><i class="fas fa-map-marker-alt"></i> Waterfalls & Tribal Views</li>  
+          </ul>  
+          <div class="package-price-row">  
+            <div class="package-price">₹14,999</div>  
+            <a href="./book-now.html?package=jagdalpur" class="package-btn">Book Now</a>  
+          </div>  
+        </div>  
+      </div>
+<div class="package-card">
+  <div class="package-image-wrapper">
+    <img src="images (3)(1)(1).jpeg" alt="Ambikapur Tour" class="package-img">
+  </div>
+  <div class="package-content">
+    <h3 class="package-title">Ambikapur Tour Package</h3>
+    <ul class="package-info">
+      <li><i class="fas fa-clock"></i> 3 Days / 2 Nights</li>
+      <li><i class="fas fa-user-friends"></i> Capacity: 3+1 Person</li>
+      <li><i class="fas fa-mountain"></i> Hills & Greenery</li>
+    </ul>
+    <div class="package-price-row">
+      <div class="package-price">₹14,999</div>
+      <a href="./book-now.html?package=ambikapur" class="package-btn">Book Now</a>
+    </div>
+  </div>
+</div>
+      <div class="package-card">
+        <div class="package-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1000&auto=format&fit=crop" alt="Raipur City Tour" class="package-img">
+        </div>
+        <div class="package-content">
+          <h3 class="package-title">Raipur Local City Tour</h3>
+          <ul class="package-info">
+            <li><i class="fas fa-clock"></i> Duration: 8 Hours</li>
+            <li><i class="fas fa-city"></i> City Landmarks</li>
+            <li><i class="fas fa-check-circle"></i> Clean & Safe Cab</li>
+          </ul>
+          <div class="package-price-row">
+            <div class="package-price">₹1,999</div>
+            <a href="./book-now.html?package=raipur" class="package-btn">Book Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="package-card">
+        <div class="package-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1000&auto=format&fit=crop" alt="Self Drive Rental" class="package-img">
+          <span class="package-badge">Popular</span>
+        </div>
+        <div class="package-content">
+          <h3 class="package-title">Self Drive Car Rental</h3>
+          <ul class="package-info">
+            <li><i class="fas fa-clock"></i> Duration: 24 Hours</li>
+            <li><i class="fas fa-car"></i> Modern Fleet</li>
+            <li><i class="fas fa-road"></i> 300 Kilometers</li>
+          </ul>
+          <div class="package-price-row">
+            <div class="package-price">₹1,999</div>
+            <a href="./book-now.html?package=selfdrive" class="package-btn">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fleet">
+  <div class="container">
+    <h2 class="services-title reveal">Our Premium Fleet</h2>
+    <p class="hero-subtitle" style="color:#6b7280; margin-bottom: 40px;">Select from our range of well-maintained, comfortable vehicles.</p>
+    
+    <div class="fleet-grid reveal">
+      
+     <div class="fleet-card">
+  <div class="fleet-img-wrapper">
+    <img src="kindpng_2175139.png" alt="Maruti Suzuki Dzire" class="fleet-img">
+  </div>
+  <div class="fleet-info">
+    <h3 class="fleet-name">Maruti Suzuki Dzire</h3>
+    <div class="fleet-type">Compact Sedan</div>
+    <div class="fleet-features">
+      <span class="fleet-feature"><i class="fas fa-user"></i> 3+1</span>
+      <span class="fleet-feature"><i class="fas fa-snowflake"></i> AC</span>
+    </div>
+    <a href="./book-now.html?car=dzire" class="fleet-btn">Book Now</a>
+  </div>
+</div>
+
+<div class="fleet-card">
+  <div class="fleet-img-wrapper">
+    <img src="images (3)(1).jpeg" alt="Kia Carens" class="fleet-img">
+  </div>
+  <div class="fleet-info">
+    <h3 class="fleet-name">Kia Carens</h3>
+    <div class="fleet-type">Premium MPV</div>
+    <div class="fleet-features">
+      <span class="fleet-feature"><i class="fas fa-user"></i> 6+1</span>
+      <span class="fleet-feature"><i class="fas fa-suitcase"></i> Spacious</span>
+    </div>
+    <a href="./book-now.html?car=carens" class="fleet-btn">Book Now</a>
+  </div>
+</div>
+
+<div class="fleet-card">
+  <div class="fleet-img-wrapper">
+    <img src="kindpng_3570574.png" alt="Maruti Suzuki Ertiga" class="fleet-img">
+  </div>
+  <div class="fleet-info">
+    <h3 class="fleet-name">Maruti Suzuki Ertiga</h3>
+    <div class="fleet-type">Comfort MUV</div>
+    <div class="fleet-features">
+      <span class="fleet-feature"><i class="fas fa-user"></i> 6+1</span>
+      <span class="fleet-feature"><i class="fas fa-suitcase"></i> Spacious</span>
+    </div>
+    <a href="./book-now.html?car=ertiga" class="fleet-btn">Book Now</a>
+  </div>
+</div>
+
+      <div class="fleet-card">
+        <div class="fleet-img-wrapper">
+          <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/128413/scorpio-classic-exterior-right-front-three-quarter.jpeg?q=75" alt="Mahindra Scorpio" class="fleet-img">
+        </div>
+        <div class="fleet-info">
+          <h3 class="fleet-name">Mahindra Scorpio</h3>
+          <div class="fleet-type">Rugged SUV</div>
+          <div class="fleet-features">
+            <span class="fleet-feature"><i class="fas fa-user"></i> 7 Seater</span>
+            <span class="fleet-feature"><i class="fas fa-mountain"></i> Power</span>
+          </div>
+          <a href="./book-now.html?car=scorpio" class="fleet-btn">Book Now</a>
+        </div>
+      </div>
+
+<div class="fleet-card">
+  <div class="fleet-img-wrapper">
+    <img src="kindpng_5736872.png" alt="Toyota Innova" class="fleet-img">
+  </div>
+  <div class="fleet-info">
+    <h3 class="fleet-name">Toyota Innova</h3>
+    <div class="fleet-type">Classic MPV</div>
+    <div class="fleet-features">
+      <span class="fleet-feature"><i class="fas fa-user"></i> 7+1</span>
+      <span class="fleet-feature"><i class="fas fa-check"></i> Reliable</span>
+    </div>
+    <a href="./book-now.html?car=crysta" class="fleet-btn">Book Now</a>
+  </div>
+</div>
+
+<div class="fleet-card">
+  <div class="fleet-img-wrapper">
+    <img src="images (3).jpeg" alt="Innova Crysta" class="fleet-img">
+  </div>
+  <div class="fleet-info">
+    <h3 class="fleet-name">Innova Crysta</h3>
+    <div class="fleet-type">Premium Luxury MPV</div>
+    <div class="fleet-features">
+      <span class="fleet-feature"><i class="fas fa-user"></i> 7+1</span>
+      <span class="fleet-feature"><i class="fas fa-crown"></i> VIP</span>
+    </div>
+    <a href="./book-now.html?car=crysta" class="fleet-btn">Book Now</a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-item">
+        <i class="fas fa-map stat-icon"></i>
+        <span class="stat-number">28</span>
+        <p class="stat-label">States Served</p>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-map-marked-alt stat-icon"></i>
+        <span class="stat-number">33</span>
+        <p class="stat-label">CG Districts</p>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-clock stat-icon"></i>
+        <span class="stat-number">24/7</span>
+        <p class="stat-label">Service</p>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-calendar-check stat-icon"></i>
+        <span class="stat-number">2020</span>
+        <p class="stat-label">Established</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="statesModal" class="states-modal">
+  <div class="states-content">
+    <span class="close-modal" onclick="closeStatesModal()">&times;</span>
+    <h2 style="text-align:center; color:#1f2937; font-size:24px;">All India Coverage</h2>
+    <div class="states-grid">
+      <div class="state-tag">Andhra Pradesh</div>
+      <div class="state-tag">Arunachal Pradesh</div>
+      <div class="state-tag">Assam</div>
+      <div class="state-tag">Bihar</div>
+      <div class="state-tag">Chhattisgarh</div>
+      <div class="state-tag">Goa</div>
+      <div class="state-tag">Gujarat</div>
+      <div class="state-tag">Haryana</div>
+      <div class="state-tag">Himachal Pradesh</div>
+      <div class="state-tag">Jharkhand</div>
+      <div class="state-tag">Karnataka</div>
+      <div class="state-tag">Kerala</div>
+      <div class="state-tag">Madhya Pradesh</div>
+      <div class="state-tag">Maharashtra</div>
+      <div class="state-tag">Manipur</div>
+      <div class="state-tag">Meghalaya</div>
+      <div class="state-tag">Mizoram</div>
+      <div class="state-tag">Nagaland</div>
+      <div class="state-tag">Odisha</div>
+      <div class="state-tag">Punjab</div>
+      <div class="state-tag">Rajasthan</div>
+      <div class="state-tag">Sikkim</div>
+      <div class="state-tag">Tamil Nadu</div>
+      <div class="state-tag">Telangana</div>
+      <div class="state-tag">Tripura</div>
+      <div class="state-tag">Uttar Pradesh</div>
+      <div class="state-tag">Uttarakhand</div>
+      <div class="state-tag">West Bengal</div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid reveal">
+      <div class="footer-card">
+        <h3>Shameem Tour & Travel</h3>
+        <p>Your trusted travel partner for safe journeys across India since 2020</p>
+        <div class="contact-numbers">
+          <i class="fas fa-phone"></i> +91 9076690347<br>
+          <i class="fas fa-phone"></i> +91 7879300388
+        </div>
+        <div class="social-icons">
+          <a href="https://wa.me/919076690347" class="social-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://wa.me/917879300388" class="social-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.instagram.com/shameemtours" class="social-instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/share/17isQV6xgp/" class="social-facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="mailto:shameemtourtravels@gmail.com" class="social-email" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-card">
+        <h3>Quick Booking</h3>
+        <ul style="list-style:none;">
+          <li><a href="./book-now.html" style="color:#e2e8f0; text-decoration:none;"><i class="fas fa-route" style="color:#1f4fff; margin-right:12px;"></i>One Way Trip</a></li>
+          <li><a href="./book-now.html" style="color:#e2e8f0; text-decoration:none;"><i class="fas fa-exchange-alt" style="color:#ff6b6b; margin-right:12px;"></i>Round Trip Driver</a></li>
+          <li><a href="./book-now.html" style="color:#e2e8f0; text-decoration:none;"><i class="fas fa-car-side" style="color:#10b981; margin-right:12px;"></i>Car Rental Driver</a></li>
+          <li style="color:#25D366; font-weight:700; margin-top:10px;"><a href="https://wa.me/919076690347" style="color:#25D366; text-decoration:none;"><i class="fab fa-whatsapp" style="margin-right:12px;"></i>WhatsApp Booking</a></li>
+        </ul>
+      </div>
+      <div class="footer-card">
+        <h3>Service Areas</h3>
+        <div style="background:rgba(255,255,255,0.1); padding:20px; border-radius:20px; backdrop-filter:blur(15px);">
+          <h4 style="color:#fff; margin-bottom:15px; font-size:16px;">All India Coverage</h4>
+          <div class="service-tags">
+            <span class="service-tag"><strong>Chhattisgarh (33 Dist)</strong></span>
+            <span class="service-tag">Maharashtra</span>
+            <span class="service-tag">Madhya Pradesh</span>
+            <span class="service-tag">Odisha</span>
+            <span class="service-tag" onclick="openStatesModal()" style="background:#1f4fff; color:white;">And More...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Shameem Tour & Travel. All rights reserved</p>
+      <p style="margin-top:12px; font-size:16px; color:#1f4fff; font-weight:700;">
+        <i class="fas fa-clock" style="margin-right:8px;"></i>24×7 Service Available
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// --- 1. LOGO ANIMATION (1 Second) ---
+window.onload = function() {
+  setTimeout(function() {
+    var preloader = document.getElementById('preloader');
+    preloader.style.opacity = '0';
+    setTimeout(function() {
+      preloader.style.display = 'none';
+    }, 500); 
+  }, 1000); // 1 Second Delay
+  
+  // Trigger scroll check immediately
+  reveal();
+};
+
+// --- 2. SCROLL REVEAL SCRIPT ---
+window.addEventListener('scroll', reveal);
+
+function reveal() {
+  var reveals = document.querySelectorAll('.reveal');
+  for (var i = 0; i < reveals.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+    if (elementTop < windowHeight - elementVisible) {
+      reveals[i].classList.add('active');
+    }
+  }
+}
+
+// Modal Scripts
+function openStatesModal() {
+  document.getElementById('statesModal').style.display = 'block';
+  document.body.style.overflow = 'hidden'; 
+}
+function closeStatesModal() {
+  document.getElementById('statesModal').style.display = 'none';
+  document.body.style.overflow = 'auto'; 
+}
+window.onclick = function(event) {
+  const modal = document.getElementById('statesModal');
+  if (event.target == modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Free Medical Cab - Shameem Tour & Travel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* BASE RESET (Same as Main Site) */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter', sans-serif; line-height:1.6; background:#f0fdf4; overflow-x:hidden; } /* Light Green BG for Medical */
+.container { max-width:1200px; margin:0 auto; padding:0 24px; }
+
+/* HEADER */
+.header { 
+  background:rgba(255,255,255,0.95); 
+  backdrop-filter:blur(20px); 
+  position:fixed; top:0; left:0; right:0; 
+  z-index:1000; padding:12px 0; 
+  box-shadow:0 2px 40px rgba(0,0,0,0.08); 
+}
+.nav { display:flex; justify-content:space-between; align-items:center; }
+.logo-container { display:flex; align-items:center; gap:10px; text-decoration:none; cursor:pointer; }
+.logo-img { height:36px; width:auto; }
+.logo-text { 
+  font-size:20px; font-weight:800; 
+  background:linear-gradient(135deg,#1f4fff,#667eea); 
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; 
+  white-space: nowrap;
+}
+.cta-back { 
+  background:#fff; color:#1f4fff; padding:8px 20px; border-radius:25px; 
+  font-weight:600; font-size:14px; text-decoration:none; border: 2px solid #1f4fff;
+  transition:all 0.3s; display:inline-flex; align-items:center; gap:8px;
+}
+.cta-back:hover { background:#1f4fff; color:#fff; }
+
+/* MEDICAL HERO SECTION */
+.med-hero { 
+  margin-top: 80px; 
+  background: linear-gradient(135deg, #dc2626, #991b1b); 
+  color: white; 
+  padding: 40px 20px; 
+  border-radius: 0 0 30px 30px; 
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
+}
+.med-title { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+.med-subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 500; }
+.location-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* FORM CONTAINER */
+.form-container { 
+  background:#fff; padding:30px; border-radius:24px; 
+  box-shadow:0 20px 60px rgba(0,0,0,0.05); max-width:800px; margin: -30px auto 40px; 
+  position: relative; z-index: 10;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 24px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f3f4f6;
+}
+.section-title i { color: #dc2626; }
+
+.form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; margin-bottom:10px; }
+.form-group { margin-bottom: 16px; }
+.form-label { display:block; font-size:13px; font-weight:700; color:#4b5563; margin-bottom:6px; }
+.form-input, .form-select { 
+  width:100%; padding:12px; border:2px solid #e5e7eb; border-radius:10px; 
+  font-size:15px; font-weight:500; transition:all 0.3s; background:#fafbfc; 
+}
+.form-input:focus, .form-select:focus { outline:none; border-color:#dc2626; background:#fff; }
+
+/* NOTICES */
+.notice-box {
+  background: #fff5f5;
+  border-left: 4px solid #dc2626;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+.notice-title { color: #991b1b; font-weight: 700; font-size: 14px; margin-bottom: 8px; display:flex; align-items:center; gap:8px;}
+.notice-list { list-style: none; padding: 0; }
+.notice-list li { font-size: 13px; color: #7f1d1d; margin-bottom: 4px; padding-left: 16px; position: relative; }
+.notice-list li::before { content: "•"; position: absolute; left: 0; color: #dc2626; font-weight: bold; }
+
+.emergency-note {
+  background: #f0fdf4;
+  border: 1px dashed #16a34a;
+  color: #15803d;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* SUBMIT BTN */
+.submit-btn { 
+  background:linear-gradient(135deg,#dc2626,#b91c1c); color:#fff; 
+  padding:16px; border:none; border-radius:50px; font-size:18px; 
+  font-weight:700; cursor:pointer; box-shadow:0 10px 30px rgba(220,38,38,0.3); 
+  transition:all 0.4s; display:flex; align-items:center; justify-content: center; gap:10px; width: 100%;
+  margin-top: 20px;
+}
+.submit-btn:hover { transform:translateY(-2px); box-shadow:0 15px 40px rgba(220,38,38,0.4); }
+
+@media (max-width:768px) {
+  .med-title { font-size: 1.6rem; }
+  .form-container { padding: 20px; margin-top: -20px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="./index.html" class="logo-container">
+        <img src="20251214_061918.png" alt="Logo" class="logo-img">
+        <span class="logo-text">Shameem Tour & Travel</span>
+      </a>
+      <a href="./index.html" class="cta-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </nav>
+  </div>
+</header>
+
+<div class="med-hero">
+  <div class="container">
+    <h1 class="med-title">Free Medical Cab Service</h1>
+    <p class="med-subtitle">Helping patients reach hospitals safely & freely.</p>
+    <div class="location-badge"><i class="fas fa-map-marker-alt"></i> Raipur City Only</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="form-container">
+    
+    <h3 class="section-title"><i class="fas fa-user-injured"></i> Patient Details</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Patient Name</label>
+        <input type="text" class="form-input" id="pt_name" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Age</label>
+        <input type="number" class="form-input" id="pt_age" placeholder="Ex: 45" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Gender</label>
+        <select class="form-select" id="pt_gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <h3 class="section-title"><i class="fas fa-user-friends"></i> Attendant Details</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Attendant Name (Saath rehne wala)</label>
+        <input type="text" class="form-input" id="at_name" placeholder="Name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Contact Number (Mandatory)</label>
+        <input type="tel" class="form-input" id="at_phone" placeholder="10 digits" maxlength="10" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Emergency Contact (Optional)</label>
+        <input type="tel" class="form-input" id="at_emergency" placeholder="Alternative Number">
+      </div>
+    </div>
+
+    <h3 class="section-title"><i class="fas fa-route"></i> Travel Details (Raipur Only)</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Pickup Location</label>
+        <input type="text" class="form-input" id="loc_pickup" placeholder="Enter Raipur address" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Drop Location (Hospital/Clinic)</label>
+        <input type="text" class="form-input" id="loc_drop" placeholder="Hospital/Home address" required>
+      </div>
+    </div>
+
+    <h3 class="section-title"><i class="fas fa-notes-medical"></i> Medical Information</h3>
+    <div class="form-group">
+      <label class="form-label">Reason for Cab</label>
+      <select class="form-select" id="med_reason">
+        <option value="Hospital Visit">Hospital Visit (General)</option>
+        <option value="Dialysis">Dialysis</option>
+        <option value="Accident">Accident (Minor)</option>
+        <option value="Emergency">Emergency</option>
+        <option value="Checkup">Regular Checkup</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="notice-box">
+      <div class="notice-title"><i class="fas fa-exclamation-circle"></i> Important Notice</div>
+      <ul class="notice-list">
+        <li>Free medical cab service sirf Raipur city ke liye available hai.</li>
+        <li>Yeh service medical help ke purpose ke liye hai.</li>
+        <li>Patient ki sari information sirf service provide karne ke liye use ki jayegi.</li>
+      </ul>
+    </div>
+
+    <div class="emergency-note">
+      <i class=""></i> Emergency Note: Emergency case me hospital ya medical authority ko inform kiya ja sakta hai.
+    </div>
+
+    <button class="submit-btn" onclick="submitMedicalRequest()">
+      <i class="fab fa-whatsapp"></i> Request Free Cab Now
+    </button>
+
+  </div>
+</div>
+
+<script>
+function submitMedicalRequest() {
+  // 1. GATHER DATA
+  const ptName = document.getElementById('pt_name').value.trim();
+  const ptAge = document.getElementById('pt_age').value.trim();
+  const ptGender = document.getElementById('pt_gender').value;
+  
+  const atName = document.getElementById('at_name').value.trim();
+  const atPhone = document.getElementById('at_phone').value.trim();
+  const atEmerg = document.getElementById('at_emergency').value.trim();
+  
+  const pickup = document.getElementById('loc_pickup').value.trim();
+  const drop = document.getElementById('loc_drop').value.trim();
+  const reason = document.getElementById('med_reason').value;
+
+  // 2. VALIDATION
+  if(!ptName || !atName || !atPhone || !pickup || !drop) {
+    alert("⚠️ Please fill all Mandatory fields (Name, Phone, Locations)");
+    return;
+  }
+  if(atPhone.length !== 10) {
+    alert("⚠️ Please enter a valid 10-digit Contact Number");
+    return;
+  }
+
+  // 3. GENERATE BOOKING ID (Random for Admin Ref)
+  const bookingID = "MED-" + Math.floor(1000 + Math.random() * 9000);
+
+  // 4. FORMAT MESSAGE
+  let msg = `🚑 *FREE MEDICAL CAB REQUEST - RAIPUR* \n`;
+  msg += `🆔 Booking ID: ${bookingID} (Pending)\n\n`;
+  
+  msg += `*🧍 Patient Details*\n`;
+  msg += `Name: ${ptName}\n`;
+  msg += `Age: ${ptAge} | Gender: ${ptGender}\n\n`;
+  
+  msg += `*👥 Attendant Details*\n`;
+  msg += `Name: ${atName}\n`;
+  msg += `📱 Contact: ${atPhone}\n`;
+  if(atEmerg) msg += `📞 Emergency: ${atEmerg}\n`;
+  msg += `\n`;
+  
+  msg += `*🚖 Travel (Raipur Only)*\n`;
+  msg += `📍 Pickup: ${pickup}\n`;
+  msg += `🏥 Drop: ${drop}\n\n`;
+  
+  msg += `*⚠️ Medical Info*\n`;
+  msg += `Reason: ${reason}\n\n`;
+  
+  msg += `_User accepted terms: Data used for medical service only._`;
+
+  // 5. SEND TO WHATSAPP
+  // Primary Number
+  const whatsappUrl = `https://wa.me/919076690347?text=${encodeURIComponent(msg)}`;
+  
+  window.open(whatsappUrl, '_blank');
+}
+</script>
+
+</body>
+</html>
